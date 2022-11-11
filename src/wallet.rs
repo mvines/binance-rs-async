@@ -131,9 +131,17 @@ impl Wallet {
     /// assert!(records.is_ok(), "{:?}", records);
     /// ```
     pub async fn withdraw(&self, query: CoinWithdrawalQuery) -> Result<()> {
-        self.client
+
+        #[derive(Deserialize)]
+        pub struct CoinWithdrawalResponse {
+            pub id: String,
+        }
+
+        let _: CoinWithdrawalResponse = self.client
             .post_signed_p(SAPI_V1_CAPITAL_WITHDRAW_APPLY, Some(query), self.recv_window)
-            .await
+            .await?;
+
+        Ok(())
     }
 
     /// Deposit History

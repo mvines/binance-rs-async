@@ -1572,7 +1572,9 @@ pub struct WithdrawalRecord {
     /// // confirm times for withdraw
     pub confirm_no: Option<u64>,
     pub info: Option<String>,
-    pub tx_id: String,
+
+    /// `tx_id` may not be returned for a time immediately after applying for a withdrawal
+    pub tx_id: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
